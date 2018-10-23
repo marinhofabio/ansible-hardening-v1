@@ -1,0 +1,39 @@
+- hosts: all
+  user: fmarinho
+  become: yes
+  gather_facts: false
+  tasks:
+  - name: THIS FILE IS GOING TO IMPLEMENT SOME FILESYSTEM HARDENING
+    template:
+      src:    files/90-lynis-hardening-fs-sysctl.conf
+      dest:   /etc/sysctl.d/90-lynis-hardening-fs-sysctl.conf
+      owner:  root
+      group:  root
+      mode:   0660
+      attribute: i
+  - name: THIS FILE IS GOING TO IMPLEMENT SOME KERNEL HARDENING
+    template:
+      src:    files/90-lynis-hardening-kernel-sysctl.conf
+      dest:   /etc/sysctl.d/90-lynis-hardening-kernel-sysctl.conf
+      owner:  root
+      group:  root
+      mode:   0660
+      attribute: i
+  - name: THIS FILE IS GOING TO IMPLEMENT SOME IPV4 HARDENING
+    template:
+      src:    files/90-lynis-hardening-ipv4-sysctl.conf
+      dest:   /etc/sysctl.d/90-lynis-hardening-ipv4-sysctl.conf
+      owner:  root
+      group:  root
+      mode:   0660
+      attribute: i
+  - name: THIS FILE IS GOING TO IMPLEMENT SOME IPV6 HARDENING
+    template:
+      src:    files/90-lynis-hardening-ipv6-sysctl.conf
+      dest:   /etc/sysctl.d/90-lynis-hardening-ipv6-sysctl.conf
+      owner:  root
+      group:  root
+      mode:   0660
+      attribute: i
+  - name: MAKING THE KERNEL READ AND APPLY ALL HARDENING FILES
+    command: sysctl --system

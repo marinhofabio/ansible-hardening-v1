@@ -1,0 +1,13 @@
+- hosts: all
+  user: fmarinho
+  become: yes
+  gather_facts: false
+  tasks:
+  - name: INSTALLING EPEL REPOSITORY
+    yum:
+      name:  epel-release
+      state: present
+  - name: INSTALLING LYNIS AUDITING TOOL
+    yum:
+      name:  lynis
+      state: present
